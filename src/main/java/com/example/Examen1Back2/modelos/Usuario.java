@@ -1,43 +1,112 @@
 package com.example.Examen1Back2.modelos;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-@Entit
-@Table(name = "usuarios")
+@Entity
+@Table(name = "usuario")
 public class Usuario {
 
+    // ATRIBUTOS
+
     @Id
-    @GeneratedValue(strategy = GenerationType.)
-    @Colun(name = "id_usuario")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "nombre", length = 100, nullable = false, unique = true, updatable = true)
     private String nombre;
 
-    @Colun(name = "correo_electronico", unique = true)
-    private String correoElectronico;
-    private String contraseña;
+    @Column(name = "correo_electronico", length = 100, nullable = false, unique = true, updatable = true)
+    private String correo_electronico;
+
+    @Column(name = "contrasena", length = 10, nullable = false, unique = true, updatable = true)
+    private String contrasena;
+
+    @Column(name = "telefono", length = 10, nullable = true, unique = true, updatable = true)
     private String telefono;
 
+    @Column(name = "tipo_usuario", nullable = false, unique = false)
     @Enumerated(EnumType.STRING)
-    private TipoUsuario tipoUsuario;
+    private TipoUsuario tipo_usuario;
 
-    //Estableciendo la relacion uno a uno con la tabla docente
+    // RELACIONES
+
     @OneToOne(mappedBy = "usuario")
     @JsonBackReference(value = "docente-usuario")
     private Docente docente;
 
+    // CONSTRUCTORES
+
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nombre, String correoElectronico, String contraseña, String telefono, TipoUsuario tipoUsuario) {
-        this.id = id;
-        this.nombre = nombre;
-        this.correoElectronico = correoElectronico;
-        this.contraseña = contraseña;
+    public Usuario(String contrasena, Docente docente, String correo_electronico, TipoUsuario tipo_usuario, String telefono, String nombre, Integer id) {
+        this.contrasena = contrasena;
+        this.docente = docente;
+        this.correo_electronico = correo_electronico;
+        this.tipo_usuario = tipo_usuario;
         this.telefono = telefono;
-        this.tipoUsuario = tipoUsuario;
+        this.nombre = nombre;
+        this.id = id;
     }
 
+    // GETTERS
 
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public TipoUsuario getTipo_usuario() {
+        return tipo_usuario;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Docente getDocente() {
+        return docente;
+    }
+
+    public String getCorreo_electronico() {
+        return correo_electronico;
+    }
+
+    // SETTERS
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public void setTipo_usuario(TipoUsuario tipo_usuario) {
+        this.tipo_usuario = tipo_usuario;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
+
+    public void setCorreo_electronico(String correo_electronico) {
+        this.correo_electronico = correo_electronico;
+    }
 }
