@@ -49,3 +49,8 @@ COMMIT 5: Corrección de la clase 'Usuario' + Creación de un ENUM 'TipoUsuario'
 15) Se corrigió el método constructor con parámetros teniendo en cuenta los renombramientos de atributos previamente realizados (l:48).
 16) Se corrigieron y añadieron los métodos getter pertinentes (l:53).
 17) Se corrigieron y añadieron los métodos setter pertinentes (l:83).
+
+COMMIT 6: Levantando servidor y ejecutando conexión con la base de datos + Corrigiendo algunos errores de sintaxis en las relaciones.
+1) En la clase 'Docente' se modificó la referencia a la columna 'Usuario' por su clave primaria correcta id_usuario > id (l:28).
+2) Se eliminó un ';' en una de las relaciones que estaba generando un problema la hora de ejecutar la conexión.
+3) Se probó ejecución desde el IDE y desde la terminar con el comando './gradlew bootRun'.
