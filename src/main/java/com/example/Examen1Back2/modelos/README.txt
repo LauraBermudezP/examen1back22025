@@ -54,3 +54,51 @@ COMMIT 6: Levantando servidor y ejecutando conexión con la base de datos + Corr
 1) En la clase 'Docente' se modificó la referencia a la columna 'Usuario' por su clave primaria correcta id_usuario > id (l:28).
 2) Se eliminó un ';' en una de las relaciones que estaba generando un problema la hora de ejecutar la conexión.
 3) Se probó ejecución desde el IDE y desde la terminar con el comando './gradlew bootRun'.
+
+COMMIT 7: Documentación final (Parte 3 del PDF)
+
+- - Descripción del proyecto:
+Como examen de conocimientos para el primer momento del submódulo Backend II, se nos solicitó clonar un repositorio de GitHub creado por el profesor, cuyo objetivo era que lo instaláramos en nuestra máquina local y corrigiéramos errores de sintaxis introducidos intencionalmente.
+
+El trabajo consistió en:
+
+- Corregir errores de sintaxis.
+- Completar anotaciones en el código.
+- Crear y/o completar métodos aplicando Programación Orientada a Objetos (POO).
+- Configurar la conexión a una base de datos (inicialmente embebida).
+
+Para el desarrollo se emplearon, además de los conocimientos previos y temas vistos en clase, las siguientes herramientas:
+
+- IntelliJ IDEA: IDE utilizado para trabajar el proyecto en el lenguaje Java en su versión 21.
+- Gradle: Herramienta para la gestión de dependencias y compilación del código.
+- Spring Boot y dependencias: Framework que, junto con sus librerías, permitió mapear clases como entidades reflejadas en la base de datos.
+- XAMPP: Plataforma que proporcionó un entorno de desarrollo para la creación, gestión y visualización de las tablas en la base de datos MySQL.
+
+- - Descripción de la conexión con la base de datos:
+
+El primer paso fue abrir XAMPP, previamente instalado en mi máquina local, y asegurarme de que tanto Apache como MySQL estuvieran en ejecución.
+En el panel de control de XAMPP, seleccioné la opción "Admin" de MySQL, lo que abrió en mi navegador la interfaz gráfica de phpMyAdmin. Allí creé una nueva base de datos llamada "develop_db", siguiendo las especificaciones del profesor. Posteriormente, en mi proyecto Java, abrí el archivo "application.properties" y configuré los parámetros necesarios para establecer la conexión:
+
+- URL de conexión: Dirección JDBC hacia el servidor MySQL, especificando el puerto y el nombre de la base de datos.
+- Usuario por defecto: root.
+- Contraseña: Vacía (sin contraseña).
+- Un parámetro llamado "spring.jpa.hibernate.ddl-auto=update" que indica que, al iniciar la aplicación, actualice automáticamente la estructura de la base de datos para que coincida con las entidades del proyecto.
+
+Una vez confirmé que toda la configuración coincidía con mi entorno, ejecuté el proyecto de dos maneras:
+
+- Desde el IDE: Usando el botón de ejecución de IntelliJ IDEA.
+- Desde la terminal: Con el comando ""./gradlew bootRun". Este método lo aprendí gracias al apoyo de la IA ChatGPT, ya que no conocía previamente cómo iniciar un proyecto Gradle desde la terminal.
+
+- - Complicaciones al momento de ejecutar el archivo "Examen1Back2Application":
+
+Cuando inicialmente traté de ejecutar mi proyecto, el IDE no me permitía usar su botón de ejecución. Seguidamente, investigué cómo correr el proyecto Gradle desde la terminal, pero al ejecutar el comando para realizar dicha acción, la terminal me devolvía varios errores.
+Uno de ellos indicaba problemas con la versión de Java, pues yo tenía instalada la versión 8, mientras que el proyecto requería la 17 o superior (no estoy segura si esto venía intencionalmente o si fue algo que me ocurrió solo a mí debido a la configuración previa de mi PC). Además, también me pedía hacer algunas configuraciones en las variables de entorno de mi máquina local.
+
+Para solucionarlo, descargué e instalé, desde la página oficial de Adoptium, la versión de Java que se me solicitaba. Luego, revisé manualmente que:
+
+- JAVA_HOME apuntara correctamente a la carpeta donde se instaló Java.
+- PATH incluyera la ruta de la carpeta de Java.
+
+Después de reiniciar la terminal y verificar la instalación con el comando "java -version", esta me confirmó que estaba usando la versión correcta. Con esto, ya pude ejecutar el proyecto de las dos maneras que anteriormente había estado utilizando, y posteriormente, la conexión con la base de datos se logró, pudiendo así visualizar las tres tablas SQL (curso, docente y usuario).
+
+(La configuración de variables de entorno necesarias y los comandos, tanto para revisar la versión de Java en mi máquina como para ejecutar el proyecto Gradle desde la terminal, los aprendí gracias al apoyo de la IA Generativa ChatGPT).
